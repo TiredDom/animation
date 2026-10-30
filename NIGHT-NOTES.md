@@ -77,9 +77,18 @@ npx --yes hyperframes@0.8.221 check --json --timeout 20m
 
 On the laptop's GPU the plain `npm run check` should not need it.
 
-Earlier runs tonight: lint, layout, contrast and motion clean; the runtime errors were the CDN block (fixed by
-vendoring GSAP) and then the watchdog above. The run with `--timeout 20m` is the last word; its result is added below
-when it finishes.
+**Final `check` (with `--timeout 20m`): `ok: true`, 0 errors.** Lint, layout, motion and contrast have no findings.
+The warnings left, all reviewed:
+
+- 6 runtime console warnings, "GPU stall due to ReadPixels": the software renderer's driver chatter.
+- `film_silent`: no sound yet (tomorrow's score and mix).
+- 3 `line_unread`: the timer in shot 58 ticks 0:03, 0:02, 0:01 a second apart, as SPEC.md asks.
+- 15 `dead_stretch` ("nothing on screen changes for 3–10 s", e.g. 68.6–78.8 s, the hoist and carry): the craft audit
+  sees the HTML layer, not the motion inside the WebGL canvas, so it reports the stretches where no caption or timer
+  changes. The end screen's hold is marked deliberate (`data-hold` on the end card).
+
+Earlier runs tonight found the CDN block (fixed by vendoring GSAP), a one-line HUD warning on the 1:30 (now one reading
+whose number turns red) and the watchdog above.
 
 ## Changes to `assets/kit/` (copy these back to `Animations/mascot/` before the next sync)
 
