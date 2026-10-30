@@ -41,6 +41,17 @@ dollhouse in shot 16, "Next: Kip vs. ___" on the end screen). All Itim via `@fon
 python scripts/timeline.py && python scripts/overlays.py
 ```
 
+Three departures from SPEC § LOOK, all for the text rules in HANDOFF.md (never over a face, contrast at least 3:1):
+
+- **Captions sit on a dark scrim sized to each line** (55% near-black, rounded), on top of the spec's white text and
+  shadow: plain white text fell under 3:1 over the pale ghosts and the morning walls.
+- **Captions that would cover a face go to the top of the frame** (top of the title-safe box). `tools/faces.cjs`
+  (with `node tools/serve.cjs 5178` running) poses the film every 0.2 s while each line can be on screen, projects
+  every face turned to the camera (brows to chin), and writes `assets/film/caption-faces.json`; `overlays.py` reads
+  it. 18 of the 54 lines go to the top. Rerun it after restaging a shot.
+- The title card keeps the spec's look with a soft dark halo behind the letters, so "KIP" in yellow reads over the
+  dollhouse's pale attic.
+
 **Sound cues.** `assets/film/cues.js` exports `CUES` (64 cues: `{ t, what, shot }`), each a moment in a shot taken
 from that shot's motion constants and placed by `TIMELINE`, so they follow a retime.
 

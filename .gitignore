@@ -4,4 +4,4 @@ renders/
 boards/lab/
 assets/vo/auditions/
 *.log
-boards/cloud/
+boards/cloud*/

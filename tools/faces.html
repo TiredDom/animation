@@ -58,7 +58,7 @@ function faces() {
     const edge = c.clone().add(new THREE.Vector3(R, 0, 0).applyQuaternion(cam.quaternion)).project(cam);
     const r = Math.hypot((edge.x - p.x) * W / 2, (edge.y - p.y) * H / 2);
     const cx = (p.x + 1) * W / 2, cy = (1 - p.y) * H / 2;
-    const box = [cx - 0.65 * r, cy - 0.35 * r, cx + 0.65 * r, cy + 0.8 * r];
+    const box = [cx - 0.65 * r, cy - 0.35 * r, cx + 0.65 * r, cy + 0.95 * r];   // brows to chin
     if (box[2] < 0 || box[0] > W || box[3] < 0 || box[1] > H) continue;
     out.push(box.map((n) => Math.round(n)));
   }
