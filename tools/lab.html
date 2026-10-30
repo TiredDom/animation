@@ -50,10 +50,12 @@ if (q.get('range')) {
 if (q.get('scene')) times = world.SHOTS.filter((s) => s.scene === +q.get('scene')).map((s) => s.key);
 const W = +q.get('w') || 960, H = Math.round((W * 9) / 16), cols = Math.min(+q.get('cols') || 2, times.length);
 const rows = Math.ceil(times.length / cols), label = q.get('label') !== '0';
+// the label sits in its own strip above each frame, so it never covers the top of the picture
+const LH = label ? 22 : 0;
 
 const sheet = document.createElement('canvas');
 sheet.width = W * cols;
-sheet.height = H * rows;
+sheet.height = (H + LH) * rows;
 const g = sheet.getContext('2d');
 const t0 = performance.now();
 const stats = [];
@@ -62,8 +64,8 @@ probe.width = 96; probe.height = 54;
 const pg = probe.getContext('2d', { willReadFrequently: true });
 times.forEach((t, i) => {
   const shot = world.renderAt(t);
-  const x = (i % cols) * W, y = Math.floor(i / cols) * H;
-  g.drawImage(canvas, x, y, W, H);
+  const x = (i % cols) * W, y = Math.floor(i / cols) * (H + LH);
+  g.drawImage(canvas, x, y + LH, W, H);
   pg.drawImage(canvas, 0, 0, 96, 54);
   const px = pg.getImageData(0, 0, 96, 54).data, lum = [];
   for (let k = 0; k < px.length; k += 4) lum.push(0.2126 * px[k] + 0.7152 * px[k + 1] + 0.0722 * px[k + 2]);
@@ -73,11 +75,11 @@ times.forEach((t, i) => {
   const flat = lum.filter((v) => Math.abs(v - med) < 6).length / lum.length;
   stats.push({ t, shot: shot.n, mean: Math.round(mean), sd: Math.round(sd), flat: Math.round(flat * 100) / 100 });
   if (label) {
-    g.fillStyle = 'rgba(0,0,0,0.55)';
-    g.fillRect(x, y, W, 26);
+    g.fillStyle = '#111';
+    g.fillRect(x, y, W, LH);
     g.fillStyle = '#fff';
     g.font = '15px ui-monospace, Consolas, monospace';
-    g.fillText(String(shot.n).padStart(2, '0') + '  ' + shot.title + '   t=' + t.toFixed(2) + 's', x + 8, y + 18);
+    g.fillText(String(shot.n).padStart(2, '0') + '  ' + shot.title + '   t=' + t.toFixed(2) + 's', x + 8, y + 16);
   }
 });
 const ms = Math.round((performance.now() - t0) / times.length);
