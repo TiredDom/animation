@@ -65,7 +65,21 @@ from that shot's motion constants and placed by `TIMELINE`, so they follow a ret
 served, from the npm registry), like three.js: the cloud's network blocks cdn.jsdelivr.net, so `check` failed every
 composition script on `gsap.timeline`. The 3D canvas carries `data-layout-ignore` (it fills the frame by design).
 
-`npx --yes hyperframes@0.8.221 lint --json`: 0 errors, 0 warnings. (`check` results below.)
+`npx --yes hyperframes@0.8.221 lint --json`: 0 errors, 0 warnings.
+
+**`check` in this cloud machine** has no GPU, so every seek renders the 3D world in software (about 5 s a frame) and a
+full `check` takes about an hour. Its default watchdog (no progress for 120 s) fires during the final craft audit,
+which re-renders frames without reporting progress; run it with a longer deadline here:
+
+```bash
+npx --yes hyperframes@0.8.221 check --json --timeout 20m
+```
+
+On the laptop's GPU the plain `npm run check` should not need it.
+
+Earlier runs tonight: lint, layout, contrast and motion clean; the runtime errors were the CDN block (fixed by
+vendoring GSAP) and then the watchdog above. The run with `--timeout 20m` is the last word; its result is added below
+when it finishes.
 
 ## Changes to `assets/kit/` (copy these back to `Animations/mascot/` before the next sync)
 
