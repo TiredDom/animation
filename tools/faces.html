@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Kip ep01 faces</title>
+</head>
+<body>
+<div id="log">probing…</div>
+<script src="../assets/kit/mascot.js"></script>
+<script src="../assets/kit/cat.js"></script>
+<script type="importmap">
+{
+  "imports": {
+    "three": "../assets/vendor/three/build/three.module.js",
+    "three/addons/": "../assets/vendor/three/examples/jsm/"
+  }
+}
+</script>
+<script type="module">
+// Face probe for the captions: poses the world (no rendering) every 0.2 s while each line can be on screen, projects
+// every visible face onto the 1920 × 1080 frame, and says whether the caption's usual band at the bottom covers a face
+// (its eyes-to-chin box), and whether the top band would. tools/faces.cjs drives it and writes
+// assets/film/caption-faces.json, which scripts/overlays.py reads to lift those captions to the top of the frame.
+import * as THREE from 'three';
+import { createWorld } from '../assets/film/world.js';
+import { TIMELINE } from '../assets/film/timeline.js';
+
+const log = document.getElementById('log');
+window.addEventListener('error', (e) => { log.textContent = 'error: ' + e.message; document.title = 'error'; });
+window.addEventListener('unhandledrejection', (e) => { log.textContent = 'error: ' + (e.reason && e.reason.message || e.reason); document.title = 'error'; });
+
+const W = 1920, H = 1080;
+const world = await createWorld(document.createElement('canvas'), { width: 192, height: 108 });
+const cam = world.camera;
+// head radius of each rig (metres) and whether it is a person (whose face is the skull's +z side)
+const HEADS = [
+  [world.cast.kip, 0.34], [world.cast.ghostKip, 0.34], [world.cast.mom, 0.36], [world.cast.ghostMom, 0.36],
+  [world.cast.cat, 0.17], [world.cast.ghostCat, 0.17],
+];
+const v = new THREE.Vector3(), c = new THREE.Vector3(), fwd = new THREE.Vector3(), toCam = new THREE.Vector3();
+
+// screen boxes [x0, y0, x1, y1] (pixels, y down) of the eyes-to-chin part of every face turned toward the camera
+function faces() {
+  const out = [];
+  cam.updateMatrixWorld(true);
+  for (const [rig, R] of HEADS) {
+    if (!rig.root.visible) continue;
+    rig.root.updateMatrixWorld(true);
+    const skull = rig.joints && rig.joints.head ? (rig.joints.head.children[0] || rig.joints.head) : null;
+    if (!skull) continue;
+    skull.getWorldPosition(c);
+    fwd.set(0, 0, 1).transformDirection(skull.matrixWorld);
+    toCam.copy(cam.position).sub(c).normalize();
+    if (fwd.dot(toCam) < -0.15) continue;                       // the back of a head is not a face
+    v.copy(c).applyMatrix4(cam.matrixWorldInverse);
+    if (v.z > -0.05) continue;                                   // behind the camera
+    const p = c.clone().project(cam);
+    const edge = c.clone().add(new THREE.Vector3(R, 0, 0).applyQuaternion(cam.quaternion)).project(cam);
+    const r = Math.hypot((edge.x - p.x) * W / 2, (edge.y - p.y) * H / 2);
+    const cx = (p.x + 1) * W / 2, cy = (1 - p.y) * H / 2;
+    const box = [cx - 0.65 * r, cy - 0.35 * r, cx + 0.65 * r, cy + 0.8 * r];
+    if (box[2] < 0 || box[0] > W || box[3] < 0 || box[1] > H) continue;
+    out.push(box.map((n) => Math.round(n)));
+  }
+  return out;
+}
+const hit = (a, b) => a[0] < b[2] && a[2] > b[0] && a[1] < b[3] && a[3] > b[1];
+
+const lines = TIMELINE.lines;
+const result = {};
+for (let i = 0; i < lines.length; i++) {
+  const l = lines[i];
+  const until = i + 1 < lines.length ? lines[i + 1].start : TIMELINE.duration;
+  const end = Math.min(until, Math.max(l.end + 0.25, l.start + 2.6));
+  // the caption's text width: at most 32 characters a line at about 29 px a character
+  const chars = Math.min(32, l.text.length), half = (chars * 29 + 40) / 2;
+  const bottom = [960 - half, 820, 960 + half, 970], top = [960 - half, 110, 960 + half, 260];
+  let nb = 0, nt = 0, n = 0;
+  for (let t = l.start; t < end; t += 0.2) {
+    const shot = world.shotAt(t);
+    world.reset();
+    shot.pose(world, t - shot.start, t, shot);
+    const fs = faces();
+    if (fs.some((f) => hit(f, bottom))) nb++;
+    if (fs.some((f) => hit(f, top))) nt++;
+    n++;
+  }
+  result[l.id] = { place: nb === 0 ? 'bottom' : nt === 0 ? 'top' : nb <= nt ? 'bottom' : 'top', faceInBottom: nb, faceInTop: nt, samples: n };
+}
+window.__faces = result;
+log.textContent = 'done: ' + Object.values(result).filter((r) => r.place === 'top').length + ' lines lifted to the top';
+document.title = 'done';
+</script>
+</body>
+</html>
