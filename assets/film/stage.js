@@ -85,20 +85,21 @@ export function bodyPose(w) {
 // ---------- Kip in his bed ----------
 
 // Kip in his bed, the body or Kip himself once he is back: on his back with his head on the pillow (sit 0), or
-// sitting up (sit 1), turned about his hips, which stay on the mattress; his legs stay along it. The blanket covers
+// sitting up (sit 1), turned about his hips, which stay on the mattress; his legs stay along it. `lean` tips him
+// sideways over the edge (degrees toward his left, the room side). The blanket covers
 // him to the shoulders lying down and falls to his lap as he sits up. `upper` merges pose values (spine, head,
 // arms) over the bed pose, or is a function (rig, base) → pose, called once he is placed, for IK. The mustache
 // is on unless the face says otherwise. Returns the rig.
 export const BED_HIPS = { y: 0.15, z: 0.04 };   // above the mattress top lying down, along the bed from its middle
-export function kipInBed(w, t, { rig = w.cast.kip, sit = 0, upper = {}, face = {}, live = false, who = null, blanket = true, mustache = 1 } = {}) {
+export function kipInBed(w, t, { rig = w.cast.kip, sit = 0, lean = 0, upper = {}, face = {}, live = false, who = null, blanket = true, mustache = 1 } = {}) {
   const bed = w.house.props.bed, DEG = Math.PI / 180;
   const tilt = -70 * (1 - sit), legs = -13 - 77 * sit;
   const base = w.Mascot.resolvePose(Object.assign({
     spine: [0, 0, 0], head: [0, 0, 0],
-    legL: [legs, 0, 3], kneeL: 4, footL: 50 - 36 * sit, legR: [legs, 0, -3], kneeR: 4, footR: 48 - 36 * sit,
+    legL: [legs, 0, 3], kneeL: 4, footL: 50 - 22 * sit, legR: [legs, 0, -3], kneeR: 4, footR: 48 - 22 * sit,
     armL: [4, 0, 5], elbowL: [-8, 0, 0], armR: [4, 0, 5], elbowR: [-8, 0, 0],
   }, typeof upper === 'function' ? {} : upper));
-  const q = new THREE.Quaternion().setFromAxisAngle(V(1, 0, 0), tilt * DEG);
+  const q = new THREE.Quaternion().setFromAxisAngle(V(0, 0, 1), -lean * DEG).multiply(new THREE.Quaternion().setFromAxisAngle(V(1, 0, 0), tilt * DEG));
   const hips = V(bed.x, bed.top + BED_HIPS.y - 0.061 * sit, bed.z + BED_HIPS.z);
   rig.root.visible = true;
   rig.root.quaternion.copy(q);
@@ -126,10 +127,10 @@ export function tuckIn(w, sit = 0) {
   bl.drape([
     { x: 0, z: bz(hz - 0.2), rx: 0.52, rz: 0.38, h: 0.52 * lie },
     { x: 0, z: bz(hz + 0.02), rx: 0.5, rz: 0.3, h: 0.36 },
-    { x: 0.1, z: bz(hz + 0.36), rx: 0.17, rz: 0.38, h: 0.24 },
-    { x: -0.1, z: bz(hz + 0.36), rx: 0.17, rz: 0.38, h: 0.24 },
-    { x: 0.11, z: bz(hz + 0.54), rx: 0.14, rz: 0.17, h: 0.36 },
-    { x: -0.11, z: bz(hz + 0.54), rx: 0.14, rz: 0.17, h: 0.36 },
+    { x: 0.1, z: bz(hz + 0.36), rx: 0.17, rz: 0.38, h: 0.24 - 0.03 * sit },
+    { x: -0.1, z: bz(hz + 0.36), rx: 0.17, rz: 0.38, h: 0.24 - 0.03 * sit },
+    { x: 0.11, z: bz(hz + 0.54), rx: 0.15 + 0.03 * sit, rz: 0.17 + 0.04 * sit, h: 0.36 - 0.1 * sit },
+    { x: -0.11, z: bz(hz + 0.54), rx: 0.15 + 0.03 * sit, rz: 0.17 + 0.04 * sit, h: 0.36 - 0.1 * sit },
   ]);
 }
 

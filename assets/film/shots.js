@@ -6,8 +6,9 @@ import { SCENE3 } from './scene3.js';
 import { SCENE4 } from './scene4.js';
 import { SCENE5 } from './scene5.js';
 import { SCENE6 } from './scene6.js';
+import { SCENE7 } from './scene7.js';
 
-const POSES = Object.assign({}, SCENE1, SCENE2, SCENE3, SCENE4, SCENE5, SCENE6);
+const POSES = Object.assign({}, SCENE1, SCENE2, SCENE3, SCENE4, SCENE5, SCENE6, SCENE7);
 
 // a shot not built yet: the living room, wide and empty, so nothing breaks while scenes are added
 const pending = {

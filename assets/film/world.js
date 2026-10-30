@@ -430,6 +430,8 @@ export async function createWorld(canvas, { width = 1920, height = 1080 } = {}) 
       pr.garagePresent.group.scale.set(1, 1, 1);
       for (const c of pr.couch.seats.concat(pr.couch.backs)) c.visible = true;
       pr.kipPresent.group.visible = true;
+      pr.kipPresent.group.position.set(0.05, 0, 0.15);
+      pr.kipPresent.group.rotation.set(0, 0.12, 0);
       pr.bed.blanket.drape([]);
       pr.bed.blanket.mesh.position.z = 0.2;
       pr.bed.blanket.mesh.scale.z = 1;
