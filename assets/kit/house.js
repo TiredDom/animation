@@ -1047,7 +1047,7 @@ export function buildHouse() {
     moon.shadow.normalBias = 0.03;
     root.add(moon, moon.target);
     const fill = new THREE.PointLight('#E9C9A0', 1.3, 0, 2);
-    fill.position.set(0.0, ATTIC + 1.2, 0.6);
+    fill.position.set(-1.2, ATTIC + 1.4, 0.0);
     g.add(fill);
     props.attic = { moon, fill, roofs };
   }

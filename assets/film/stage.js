@@ -119,8 +119,10 @@ export function momAtCounter(w, t, { rig = w.cast.mom, sip = 0, turn = 0, face =
 
 // Mom's real body after she turns ghost (from the tap in shot 33 on): frozen at the counter mid-sip, the mug at her
 // lips, no breath, no blink, no phone. Every later shot that shows the kitchen counter shows her like this.
-export function momFrozen(w, t) {
-  return momAtCounter(w, t, { sip: 1, live: false, who: null, phone: false, face: { lid: 0.18, mouthCurve: 0.25, mouthRound: 0.3, mouthOpen: 0.08, lookY: -0.2 } });
+// She leans back on the counter facing the room (where scene 2 left her), so her frozen face reads.
+export const MOM_LEAN = [-5.65, 0, -1.5];
+export function momFrozen(w, t, { at = MOM_LEAN, turn = 180 } = {}) {
+  return momAtCounter(w, t, { sip: 1, live: false, who: null, phone: false, at, turn, face: { lid: 0.18, mouthCurve: 0.25, mouthRound: 0.3, mouthOpen: 0.08, lookY: -0.2 } });
 }
 
 // ---------- feet on the ground ----------
