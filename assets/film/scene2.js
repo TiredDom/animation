@@ -53,7 +53,7 @@ export const SCENE2 = {
       momAtCounter(w, t, { turn: 180, at: LEAN, sip, face: { mouthCurve: 0.3, lid: 0.18 } });
       const wave = Math.sin(lt * 9) * (lt < 1.4 ? 22 : 34);
       person(w, w.cast.ghostKip, t, {
-        at: [-5.42, 0.42, -0.92], yaw: 232, ghost: true, who: 'kip',
+        at: [-5.06, 0.42, -0.98], yaw: 238, ghost: true, who: 'kip',
         pose: floatWith(w, {
           spine: [6, 0, 0], head: [-8, 0, 0],
           armR: [-30, 0, 96 + 0.3 * wave], elbowR: [0, 0, 60 + wave],
@@ -61,7 +61,7 @@ export const SCENE2 = {
         }),
         face: faceTrack(w, lt, [[0, { browUp: 0.5, eyeScale: 1.05 }], [1.5, { browUp: 0.9, eyeScale: 1.15, browTilt: -0.3 }], [3.0, { browUp: 0.6, mouthCurve: -0.3, lookX: 0.3 }]]),
       });
-      w.frameOn([-5.5, 1.55, -1.18], 1.2, { az: -72, el: 2, fov: L.wide });
+      w.frameOn([-5.36, 1.66, -1.22], 1.52, { az: -64, el: 2, fov: L.wide });
     },
   },
   13: {

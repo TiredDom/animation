@@ -36,9 +36,9 @@
   "samples": 23
  },
  "k06": {
-  "place": "bottom",
+  "place": "top",
   "faceInBottom": 13,
-  "faceInTop": 13,
+  "faceInTop": 0,
   "samples": 13
  },
  "m02": {
