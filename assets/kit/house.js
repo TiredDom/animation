@@ -22,7 +22,7 @@ const H = 2.8;               // ground floor ceiling height
 const UP = H + 0.12;         // upstairs floor level
 const UH = 2.6;              // upstairs ceiling height
 const ATTIC = UP + UH + 0.12; // attic floor level
-const RIDGE = ATTIC + 1.9;   // roof ridge
+const RIDGE = ATTIC + 2.6;   // roof ridge: tall enough for a ghost to float upright along the middle of the attic
 const DEG = Math.PI / 180;
 
 export const LEVELS = { ground: 0, up: UP, attic: ATTIC, ridge: RIDGE };
@@ -685,7 +685,7 @@ export function buildHouse() {
   }
   {
     // a bare bulb in the garage ceiling
-    const light = new THREE.PointLight('#FFD9AE', 1.5, 0, 2);
+    const light = new THREE.PointLight('#FFD9AE', 2.2, 0, 2);
     light.position.set(-9.1, 2.6, -0.3);
     light.castShadow = true;
     light.shadow.mapSize.set(1024, 1024);
@@ -1046,7 +1046,7 @@ export function buildHouse() {
     moon.shadow.bias = -0.0004;
     moon.shadow.normalBias = 0.03;
     root.add(moon, moon.target);
-    const fill = new THREE.PointLight('#E9C9A0', 0.9, 0, 2);
+    const fill = new THREE.PointLight('#E9C9A0', 1.3, 0, 2);
     fill.position.set(0.0, ATTIC + 1.2, 0.6);
     g.add(fill);
     props.attic = { moon, fill, roofs };

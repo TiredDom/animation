@@ -117,6 +117,79 @@ export function momAtCounter(w, t, { rig = w.cast.mom, sip = 0, turn = 0, face =
   });
 }
 
+// Mom's real body after she turns ghost (from the tap in shot 33 on): frozen at the counter mid-sip, the mug at her
+// lips, no breath, no blink, no phone. Every later shot that shows the kitchen counter shows her like this.
+export function momFrozen(w, t) {
+  return momAtCounter(w, t, { sip: 1, live: false, who: null, phone: false, face: { lid: 0.18, mouthCurve: 0.25, mouthRound: 0.3, mouthOpen: 0.08, lookY: -0.2 } });
+}
+
+// ---------- feet on the ground ----------
+
+// Leg angles that put a foot's sole on a world point, the sole kept level: two-bone IK in the leg's swing plane
+// (the hip pivot, the body's forward and up). Call after the body's pose is set, so the hip pivots are where they
+// will be drawn. Returns { leg, knee, foot } pose values for that side.
+const _q = new THREE.Quaternion();
+export function legIK(rig, side, sole) {
+  rig.root.updateMatrixWorld(true);
+  const hip = rig.joints['leg' + side].getWorldPosition(V(0, 0, 0));
+  const fwd = V(0, 0, 1).applyQuaternion(rig.root.getWorldQuaternion(_q));
+  fwd.y = 0;
+  fwd.normalize();
+  const v = sole.clone().add(V(0, rig.dims.ankle, 0)).sub(hip);
+  const f = v.dot(fwd), d = -v.y;
+  const a = rig.dims.thigh, b = rig.dims.shin;
+  const r = Math.min(a + b - 1e-3, Math.max(Math.abs(a - b) + 1e-3, Math.hypot(f, d)));
+  const cl = (x) => Math.max(-1, Math.min(1, x));
+  const al = Math.atan2(f, d) + Math.acos(cl((a * a + r * r - b * b) / (2 * a * r)));
+  const kn = Math.PI - Math.acos(cl((a * a + b * b - r * r) / (2 * a * b)));
+  const deg = 180 / Math.PI;
+  return { leg: [-al * deg, 0, 1.5], knee: kn * deg, foot: (al - kn) * deg };
+}
+
+// Climbing a flight tread by tread: feet alternate, the first step lifts a foot from the floor to the first tread and
+// every later one lifts a foot two treads, past the planted one; the pelvis rises one tread a step. `k` is how many
+// steps are done (a float: 2.5 is halfway through the third). Returns the world sole points of both feet and the
+// pelvis (hip-pivot) point; put the body there and solve the legs with legIK. The flight climbs toward -z.
+export function stairGait(st, k, { x = st.x, startZ = st.zFront + 0.22, h = 0.6, hipX = 0.1, first = 'R' } = {}) {
+  const tread = (i) => (i < 0 ? V(0, 0, startZ) : V(0, st.stepTop(i), st.zAt(i) + 0.03));
+  const other = first === 'R' ? 'L' : 'R';
+  const feet = {};
+  for (const side of [first, other]) {
+    const par = side === first ? 0 : 1;              // its steps are par, par + 2, ...
+    const sx = x + (side === 'L' ? -1 : 1) * hipX;    // climbing toward -z: the left foot is on -x
+    const done = Math.floor((k - par) / 2) * 2 + par; // its last step started at or before k
+    let p;
+    if (k < par) p = tread(-1);
+    else {
+      const u = Math.min(1, k - done);
+      const from = tread(done - 2), to = tread(done);
+      const e = E.inOut(u);
+      p = from.clone().lerp(to, e);
+      p.y += 0.12 * Math.sin(Math.PI * u) + 0.06 * Math.sin(Math.PI * Math.min(1, u * 1.4));
+    }
+    p.x = sx;
+    feet[side] = p;
+  }
+  // the pelvis: between the two planted treads, one tread higher a step
+  const at = (n) => {
+    if (n <= 0) return V(x, h, startZ);
+    const a = tread(n - 1), b = tread(n - 2);
+    return V(x, Math.min(a.y, b.y) + h, (a.z + b.z) / 2);
+  };
+  const n0 = Math.floor(k), u = k - n0, e = 0.5 * u + 0.5 * E.inOut(u);
+  const pelvis = at(n0).lerp(at(n0 + 1), e);
+  return { feet, pelvis };
+}
+
+// A walk that is already under way at lt = a and eases to a stop at b: the share of the path covered (0..1),
+// moving at constant speed, then slowing over the last `decel` seconds (sine out). The speed is path / (time).
+export function cruise(lt, a, b, decel = 0.6) {
+  const T = b - a, run = T - decel, total = run + (2 * decel) / Math.PI;
+  const s = Math.max(0, Math.min(T, lt - a));
+  if (s <= run) return s / total;
+  return (run + (2 * decel / Math.PI) * Math.sin((Math.PI / 2) * ((s - run) / decel))) / total;
+}
+
 // ---------- the cat ----------
 
 // The cat placed with a pose and a face; her head turns toward `look` (a world point) within a neck's range.

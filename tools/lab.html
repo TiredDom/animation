@@ -26,6 +26,9 @@
 // Board lab: renders film times through the same world as the composition and saves them as one sheet in
 // boards/lab/<name>.png (only through mascot/tools/serve.cjs):
 //   /kip-ep01/tools/lab.html?name=scene1&t=0.9,2,6&w=960&cols=2     (no t: every shot's key time)
+// res=0.5 renders the world at half size for quick drafts (the framing is the same). After the sheet is saved,
+// window.__stats lists every frame's luminance mean and spread and the share of near-flat pixels, so a camera
+// inside a wall (a flat grey or red frame) shows up as a number, not only by eye.
 import { createWorld } from '../assets/film/world.js';
 
 const log = document.getElementById('log');
@@ -35,7 +38,8 @@ window.addEventListener('unhandledrejection', (e) => { log.textContent = 'error:
 const q = new URLSearchParams(location.search);
 const name = q.get('name') || 'lab';
 const canvas = document.createElement('canvas');
-const world = await createWorld(canvas, { width: 1920, height: 1080 });
+const res = Math.min(1, +q.get('res') || 1);
+const world = await createWorld(canvas, { width: Math.round(1920 * res), height: Math.round(1080 * res) });
 let times = q.get('t') ? q.get('t').split(',').map(Number) : world.SHOTS.filter((s) => s.built).map((s) => s.key);
 if (q.get('range')) {
   // range=a,b,step: every step seconds from a to b
@@ -52,10 +56,22 @@ sheet.width = W * cols;
 sheet.height = H * rows;
 const g = sheet.getContext('2d');
 const t0 = performance.now();
+const stats = [];
+const probe = document.createElement('canvas');
+probe.width = 96; probe.height = 54;
+const pg = probe.getContext('2d', { willReadFrequently: true });
 times.forEach((t, i) => {
   const shot = world.renderAt(t);
   const x = (i % cols) * W, y = Math.floor(i / cols) * H;
   g.drawImage(canvas, x, y, W, H);
+  pg.drawImage(canvas, 0, 0, 96, 54);
+  const px = pg.getImageData(0, 0, 96, 54).data, lum = [];
+  for (let k = 0; k < px.length; k += 4) lum.push(0.2126 * px[k] + 0.7152 * px[k + 1] + 0.0722 * px[k + 2]);
+  const mean = lum.reduce((a, b) => a + b, 0) / lum.length;
+  const sd = Math.sqrt(lum.reduce((a, b) => a + (b - mean) * (b - mean), 0) / lum.length);
+  const med = lum.slice().sort((a, b) => a - b)[lum.length >> 1];
+  const flat = lum.filter((v) => Math.abs(v - med) < 6).length / lum.length;
+  stats.push({ t, shot: shot.n, mean: Math.round(mean), sd: Math.round(sd), flat: Math.round(flat * 100) / 100 });
   if (label) {
     g.fillStyle = 'rgba(0,0,0,0.55)';
     g.fillRect(x, y, W, 26);
@@ -67,9 +83,10 @@ times.forEach((t, i) => {
 const ms = Math.round((performance.now() - t0) / times.length);
 const blob = await new Promise((r) => sheet.toBlob(r, 'image/png'));
 document.getElementById('out').src = URL.createObjectURL(blob);
-const res = await fetch('/save/' + name + '.png?to=kip-ep01/boards/lab', { method: 'POST', body: blob });
-log.textContent = (res.ok ? 'saved boards/lab/' + name + '.png' : 'save failed: ' + res.status) + ' · ' + ms + ' ms a frame';
-document.title = res.ok ? 'done' : 'error';
+const saved = await fetch('/save/' + name + '.png?to=kip-ep01/boards/lab', { method: 'POST', body: blob });
+log.textContent = (saved.ok ? 'saved boards/lab/' + name + '.png' : 'save failed: ' + saved.status) + ' · ' + ms + ' ms a frame';
+window.__stats = stats;
+document.title = saved.ok ? 'done' : 'error';
 </script>
 </body>
 </html>

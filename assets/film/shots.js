@@ -3,8 +3,9 @@ import { TIMELINE } from './timeline.js';
 import { SCENE1 } from './scene1.js';
 import { SCENE2 } from './scene2.js';
 import { SCENE3 } from './scene3.js';
+import { SCENE4 } from './scene4.js';
 
-const POSES = Object.assign({}, SCENE1, SCENE2, SCENE3);
+const POSES = Object.assign({}, SCENE1, SCENE2, SCENE3, SCENE4);
 
 // a shot not built yet: the living room, wide and empty, so nothing breaks while scenes are added
 const pending = {

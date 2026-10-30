@@ -44,7 +44,7 @@ SHOTS = [
     (22, 3, 'Mom finds the body', 3.5, [], 0),
     (23, 3, 'The marker', 2.5, [], 0),
     (24, 3, 'The mustache', 3.5, [], 0),
-    (25, 3, 'Hup', 6.0, [('m03', 1.0)], 4.4),
+    (25, 3, 'Hup', 8.5, [('m03', 1.0)], 4.4),       # 6.0 → 8.5 (night of 10-30): the hoist, the carry and the climb
     (26, 3, 'The garage', 3.0, [], 0),
     (27, 3, 'Bingo', 3.0, [('k12', 1.2)], 0.8),
     (28, 3, 'Come on', 3.5, [('k13', 1.4)], 0.5),

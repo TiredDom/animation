@@ -233,41 +233,48 @@ function paintDadPhoto(renderer, house, Mascot) {
   dad.mats.hoodie.map = tex;
   dad.mats.hoodie.color.set('#ffffff');
   dad.mats.hoodie.needsUpdate = true;
-  // the afro: a big soft bumpy ball behind and above his head
-  const afroG = new THREE.SphereGeometry(0.62, 64, 48);
+  // a shirt, not a hoodie: no drawstrings, and a big pointed seventies collar over the neckline
+  dad.root.traverse((o) => { if (o.isMesh && o.material === dad.mats.strings) o.visible = false; });
+  const collarMat = new THREE.MeshStandardMaterial({ color: '#F3D9A4', roughness: 0.7, side: THREE.DoubleSide });
+  for (const s of [-1, 1]) {
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.Float32BufferAttribute([0.02 * s, 1.0, 0.235, 0.17 * s, 1.05, 0.17, 0.19 * s, 0.87, 0.175], 3));
+    g.computeVertexNormals();
+    const flap = new THREE.Mesh(g, collarMat);
+    flap.position.y = -0.6;
+    dad.joints.spine.add(flap);
+  }
+  // the afro: a big soft bumpy ball behind and above his head, its front pressed back behind the face, so from the
+  // front it rings the head and never covers the face
+  const afroG = new THREE.SphereGeometry(1, 72, 54);
   const pos = afroG.attributes.position;
   for (let i = 0; i < pos.count; i++) {
-    const v = new THREE.Vector3().fromBufferAttribute(pos, i);
-    const n = v.clone().normalize();
-    const bump = 0.035 * Math.sin(n.x * 23) * Math.sin(n.y * 19) * Math.sin(n.z * 21) + 0.02 * Math.sin(n.x * 41 + n.y * 37);
-    v.addScaledVector(n, bump);
-    pos.setXYZ(i, v.x, v.y, v.z);
+    const n = new THREE.Vector3().fromBufferAttribute(pos, i);
+    const bump = 1 + 0.06 * Math.sin(n.x * 23) * Math.sin(n.y * 19) * Math.sin(n.z * 21) + 0.035 * Math.sin(n.x * 41 + n.y * 37);
+    pos.setXYZ(i, n.x * 0.7 * bump, n.y * 0.62 * bump, (n.z > 0 ? n.z * 0.32 : n.z) * 0.6 * bump);
   }
   afroG.computeVertexNormals();
   const skull = dad.joints.head.children[0];
   const afro = new THREE.Mesh(afroG, new THREE.MeshStandardMaterial({ color: '#2A1A12', roughness: 0.95 }));
-  afro.position.set(0, 0.2, -0.12);
-  afro.scale.set(1.08, 0.92, 0.95);
+  afro.position.set(0, 0.22, -0.14);
   skull.add(afro);
-  dad.setPose({ head: [-4, -10, 6], spine: [-2, -6, 0], armL: [-12, 0, 30], elbowL: [-70, 0, 0], armR: [-10, 0, 16], elbowR: [-20, 0, 0] });
+  dad.setPose({ head: [-3, -6, 5], spine: [-2, -4, 0], armL: [-12, 0, 30], elbowL: [-70, 0, 0], armR: [-10, 0, 16], elbowR: [-20, 0, 0] });
   dad.setExpression({ happy: 0.55, mouthCurve: 1, mouthOpen: 0.38, teeth: 1, mouthWide: 1.15, browUp: 0.3, mustache: 1, blush: 0.3 });
-  dad.root.rotation.y = 0.32;
+  dad.root.rotation.y = 0.14;
   scene.add(dad.root);
+  // head and shoulders with the whole afro: the frame runs from his chest to just over the hair
   const cam = new THREE.PerspectiveCamera(24, W / H, 0.1, 30);
-  cam.position.set(0.25, 1.45, 4.4);
-  cam.lookAt(0, 1.38, 0);
-  // render into the bottom-left corner of the main canvas, copy it out, and restore
+  cam.position.set(0.12, 1.6, 3.6);
+  cam.lookAt(0, 1.52, 0);
+  // render at the photo's own size (tone mapped like the film), copy it out, and restore the canvas
   const size = renderer.getSize(new THREE.Vector2());
-  renderer.setViewport(0, 0, W, H);
-  renderer.setScissor(0, 0, W, H);
-  renderer.setScissorTest(true);
+  renderer.setSize(W, H, false);
   renderer.setRenderTarget(null);
   renderer.render(scene, cam);
   const out = document.createElement('canvas');
   out.width = W; out.height = H;
-  out.getContext('2d').drawImage(renderer.domElement, 0, size.y - H, W, H, 0, 0, W, H);
-  renderer.setScissorTest(false);
-  renderer.setViewport(0, 0, size.x, size.y);
+  out.getContext('2d').drawImage(renderer.domElement, 0, 0, W, H, 0, 0, W, H);
+  renderer.setSize(size.x, size.y, false);
   const photoTex = new THREE.CanvasTexture(out);
   photoTex.colorSpace = THREE.SRGBColorSpace;
   house.props.dadPhoto.photo.material = new THREE.MeshStandardMaterial({ map: photoTex, roughness: 0.35 });
@@ -323,9 +330,12 @@ export async function createWorld(canvas, { width = 1920, height = 1080 } = {}) 
   const ghosts = [cast.ghostKip, cast.ghostMom, cast.ghostCat];
   for (const c of Object.values(cast)) scene.add(c.root);
 
+  // the gap of light under the garage present's lid, seen from inside the box (shot 29)
+  const slit = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: '#FFE4B8' }));
+  slit.name = 'slit';
   const props = {
     controller: makeController(), mug: makeMug(), phone: makePhone(), marker: makeMarker(), cupcake: makeCupcake(),
-    laundry: makeLaundryBody(), coat: makeCoatOnChair(), cushions: makeCushionHeap(house.props.couch.mat),
+    laundry: makeLaundryBody(), coat: makeCoatOnChair(), cushions: makeCushionHeap(house.props.couch.mat), slit,
   };
   for (const p of Object.values(props)) scene.add(p);
 
@@ -410,11 +420,14 @@ export async function createWorld(canvas, { width = 1920, height = 1080 } = {}) 
       if (cap.parent !== mk) mk.add(cap);
       cap.position.set(0, 0.07, 0);
       cap.rotation.set(0, 0, 0);
+      cap.scale.set(1, 1, 1);
       cap.visible = true;
       const pr = house.props;
+      for (const c of pr.garagePresent.group.children) c.visible = true;
       pr.garagePresent.inside.visible = false;
       pr.garagePresent.socks.visible = false;
       pr.garagePresent.group.visible = true;
+      pr.garagePresent.group.scale.set(1, 1, 1);
       for (const c of pr.couch.seats.concat(pr.couch.backs)) c.visible = true;
       pr.kipPresent.group.visible = true;
       pr.bed.blanket.drape([]);
