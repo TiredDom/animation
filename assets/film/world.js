@@ -431,6 +431,9 @@ export async function createWorld(canvas, { width = 1920, height = 1080 } = {}) 
       for (const c of pr.couch.seats.concat(pr.couch.backs)) c.visible = true;
       pr.kipPresent.group.visible = true;
       pr.bed.blanket.drape([]);
+      pr.bed.blanket.mesh.position.z = 0.2;
+      pr.bed.blanket.mesh.scale.z = 1;
+      pr.kipDoor.pivot.rotation.y = -0.25;   // Kip's door stands a little open, into his room
       pr.trunk.lid.rotation.x = 0;
       reflector.visible = false;
       mg.glass.visible = true;
