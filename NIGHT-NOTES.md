@@ -61,6 +61,10 @@ captions over chins in the close shots, captions low in contrast.
 **Sound cues.** `assets/film/cues.js` exports `CUES` (64 cues: `{ t, what, shot }`), each a moment in a shot taken
 from that shot's motion constants and placed by `TIMELINE`, so they follow a retime.
 
+**GSAP is vendored.** `index.html` loads GSAP 3.14.2 from `assets/vendor/gsap/gsap.min.js` (the same file the CDN
+served, from the npm registry), like three.js: the cloud's network blocks cdn.jsdelivr.net, so `check` failed every
+composition script on `gsap.timeline`. The 3D canvas carries `data-layout-ignore` (it fills the frame by design).
+
 `npx --yes hyperframes@0.8.221 lint --json`: 0 errors, 0 warnings. (`check` results below.)
 
 ## Changes to `assets/kit/` (copy these back to `Animations/mascot/` before the next sync)
