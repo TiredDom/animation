@@ -33,8 +33,7 @@
   <div id="root" data-composition-id="hud" data-width="1920" data-height="1080">
     <div id="hud-21" class="clip hud" data-start="66.5" data-duration="2" data-track-index="1"><span class="hud-text">SPECTATING · RETURN IN <span class="hud-num">3:41</span></span></div>
     <div id="hud-30" class="clip hud" data-start="100" data-duration="2" data-track-index="1"><span class="hud-text">SPECTATING · RETURN IN <span class="hud-num">2:10</span></span></div>
-    <div id="hud-42a" class="clip hud" data-start="144.433" data-duration="0.6" data-track-index="2"><span class="hud-text">SPECTATING · RETURN IN <span class="hud-num">1:30</span></span></div>
-    <div id="hud-42b" class="clip hud" data-start="145.033" data-duration="1.4" data-track-index="2"><span class="hud-text">SPECTATING · RETURN IN <span class="hud-num red">1:30</span></span></div>
+    <div id="hud-42" class="clip hud" data-start="144.433" data-duration="2" data-track-index="2"><span class="hud-text">SPECTATING · RETURN IN <span class="hud-num">1:30</span></span></div>
     <div id="hud-47" class="clip hud" data-start="161.9" data-duration="1.5" data-track-index="3"><span class="hud-text">SPECTATING · RETURN IN <span class="hud-num red">0:58</span></span></div>
     <div id="hud-50" class="clip hud" data-start="170.033" data-duration="3.6667" data-track-index="3"><span class="hud-text">SPECTATING · RETURN IN <span class="hud-num red">0:31</span></span></div>
     <div id="hud-52" class="clip hud" data-start="179.6" data-duration="1.5" data-track-index="3"><span class="hud-text">SPECTATING · RETURN IN <span class="hud-num red">0:15</span></span></div>
@@ -46,6 +45,7 @@
   <script>
     (() => {
     const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#hud-42 .hud-num", { color: "rgba(255, 255, 255, 0.9)" }, { color: "#FF5A4E", duration: 0.25, ease: "sine.inOut" }, 145.033);
     window.__timelines["hud"] = tl;
     })();
   </script>

@@ -26,11 +26,13 @@ YELLOW = '#FFB833'
 RED = '#FF5A4E'
 
 # The one story timer: (shot, [(seconds into the shot, value)]), the value shown until the next one or the shot's
-# end. The numbers turn red from 1:30 down (shot 42 starts white and turns).
+# end. The numbers are red from 1:30 down; in shot 42 the 1:30 turns red TURN_RED seconds in (a colour change on the
+# same reading, so it stays one line to read).
+TURN_RED = {42: 0.6}
 HUD = [
     (21, [(0, '3:41')]),
     (30, [(0, '2:10')]),
-    (42, [(0, '1:30'), (0.6, '1:30!')]),
+    (42, [(0, '1:30')]),
     (47, [(0, '0:58')]),
     (50, [(0, '0:31')]),
     (52, [(0, '0:15')]),
@@ -226,24 +228,27 @@ def build():
         for i, (at, val) in enumerate(keys):
             s = snap(sh['start'] + at)
             e = snap(sh['start'] + keys[i + 1][0]) if i + 1 < len(keys) else sh['end']
-            num = val.rstrip('!')
+            num = val
             mins, secs = num.split(':')
-            red = val.endswith('!') or int(mins) * 60 + int(secs) < 90
+            red = int(mins) * 60 + int(secs) < 90 and n not in TURN_RED
             inner = f'<span class="hud-text">SPECTATING · RETURN IN <span class="hud-num{" red" if red else ""}">{num}</span></span>'
             hud.append(clip(f'hud-{n}' + ('' if len(keys) == 1 else 'abc'[i]), s, e, 'hud', inner, HUD_LANE[n]))
+    turns = ''.join(f'    tl.fromTo("#hud-{n} .hud-num", {{ color: "rgba(255, 255, 255, 0.9)" }}, {{ color: "{RED}", duration: 0.25, ease: "sine.inOut" }}, '
+                    f'{snap(SHOTS[n]["start"] + at):g});\n' for n, at in TURN_RED.items())
     t16, t69 = SHOTS[16], SHOTS[69]
     a, b = t16['start'], t16['end']
     c, d = snap(t69['start'] + 1.0), t69['end']
     cards = [clip('title', a, b, 'title-card', '<div class="title-in"><span class="kip">KIP</span> vs. SPECTATOR MODE</div>'),
              clip('next', c, d, 'next-card', '<div class="next-in">Next: <span class="kip">Kip</span> vs. ___</div>')
-             .replace('data-track-index="1">', 'data-track-index="1" data-layout-allow-caption-zone>')]  # no caption plays then
+             .replace('data-track-index="1">', 'data-track-index="1" data-layout-allow-caption-zone data-hold>')]
+    # the end card: no caption plays then (caption zone), and the end screen's stillness is deliberate (data-hold)
     # fades on the cards' inner elements (never on the clips), no movement while they are read
     fades = (f'    tl.fromTo("#title .title-in", {{ opacity: 0 }}, {{ opacity: 1, duration: 0.45, ease: "sine.out" }}, {a + 0.15:g});\n'
              f'    tl.to("#title .title-in", {{ opacity: 0, duration: 0.35, ease: "sine.in" }}, {round(b - 0.4, 4):g});\n'
              f'    tl.fromTo("#next .next-in", {{ opacity: 0 }}, {{ opacity: 1, duration: 0.6, ease: "sine.out" }}, {c + 0.05:g});\n')
     return {
         'captions': composition('captions', 'A caption for every spoken line, one group at a time.', CAPTIONS_CSS, caps),
-        'hud': composition('hud', 'The one story timer: SPECTATING · RETURN IN m:ss.', HUD_CSS, hud),
+        'hud': composition('hud', 'The one story timer: SPECTATING · RETURN IN m:ss.', HUD_CSS, hud, turns),
         'cards': composition('cards', 'The title card over the dollhouse (shot 16) and the end card (shot 69).', CARDS_CSS, cards, fades),
     }, len(caps), len(hud)
 
