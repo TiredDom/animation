@@ -1,0 +1,49 @@
+{
+ "id": "m08",
+ "who": "mom",
+ "text": "Warmer...",
+ "voice": "BBz8H3kffyIUs3SYExlh",
+ "voice_name": "Sabine",
+ "settings": [
+  0.5,
+  0.8,
+  0.25,
+  1.0
+ ],
+ "model": "eleven_v4",
+ "alignment": {
+  "characters": [
+   "W",
+   "a",
+   "r",
+   "m",
+   "e",
+   "r",
+   ".",
+   ".",
+   "."
+  ],
+  "character_start_times_seconds": [
+   0.0,
+   0.267,
+   0.333,
+   0.4,
+   0.507,
+   0.613,
+   0.72,
+   0.8,
+   0.88
+  ],
+  "character_end_times_seconds": [
+   0.267,
+   0.333,
+   0.4,
+   0.507,
+   0.613,
+   0.72,
+   0.8,
+   0.88,
+   1.04
+  ]
+ }
+}

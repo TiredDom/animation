@@ -1,0 +1,46 @@
+{
+ "id": "k18",
+ "who": "kip",
+ "text": "AAAAAAH!",
+ "voice": "wIVKcZbkr7yia2bPb1Hm",
+ "voice_name": "Chrisva",
+ "settings": [
+  0.4,
+  0.8,
+  0.35,
+  1.0
+ ],
+ "model": "eleven_v4",
+ "alignment": {
+  "characters": [
+   "A",
+   "A",
+   "A",
+   "A",
+   "A",
+   "A",
+   "H",
+   "!"
+  ],
+  "character_start_times_seconds": [
+   0.0,
+   0.45,
+   0.54,
+   0.63,
+   0.72,
+   0.78,
+   0.84,
+   0.96
+  ],
+  "character_end_times_seconds": [
+   0.45,
+   0.54,
+   0.63,
+   0.72,
+   0.78,
+   0.84,
+   0.96,
+   1.36
+  ]
+ }
+}

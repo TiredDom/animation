@@ -1,0 +1,67 @@
+{
+ "id": "k27",
+ "who": "kip",
+ "text": "Then you'd win!",
+ "voice": "wIVKcZbkr7yia2bPb1Hm",
+ "voice_name": "Chrisva",
+ "settings": [
+  0.4,
+  0.8,
+  0.35,
+  1.0
+ ],
+ "model": "eleven_v4",
+ "alignment": {
+  "characters": [
+   "T",
+   "h",
+   "e",
+   "n",
+   " ",
+   "y",
+   "o",
+   "u",
+   "'",
+   "d",
+   " ",
+   "w",
+   "i",
+   "n",
+   "!"
+  ],
+  "character_start_times_seconds": [
+   0.0,
+   0.2,
+   0.24,
+   0.28,
+   0.32,
+   0.36,
+   0.373,
+   0.387,
+   0.4,
+   0.48,
+   0.56,
+   0.76,
+   0.827,
+   0.893,
+   0.96
+  ],
+  "character_end_times_seconds": [
+   0.2,
+   0.24,
+   0.28,
+   0.32,
+   0.36,
+   0.373,
+   0.387,
+   0.4,
+   0.48,
+   0.56,
+   0.76,
+   0.827,
+   0.893,
+   0.96,
+   1.12
+  ]
+ }
+}

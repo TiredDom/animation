@@ -1,0 +1,67 @@
+{
+ "id": "m16",
+ "who": "mom",
+ "text": "Happy birthday!",
+ "voice": "BBz8H3kffyIUs3SYExlh",
+ "voice_name": "Sabine",
+ "settings": [
+  0.5,
+  0.8,
+  0.25,
+  1.0
+ ],
+ "model": "eleven_v4",
+ "alignment": {
+  "characters": [
+   "H",
+   "a",
+   "p",
+   "p",
+   "y",
+   " ",
+   "b",
+   "i",
+   "r",
+   "t",
+   "h",
+   "d",
+   "a",
+   "y",
+   "!"
+  ],
+  "character_start_times_seconds": [
+   0.0,
+   0.24,
+   0.28,
+   0.32,
+   0.36,
+   0.4,
+   0.48,
+   0.56,
+   0.64,
+   0.72,
+   0.8,
+   0.88,
+   0.96,
+   1.04,
+   1.12
+  ],
+  "character_end_times_seconds": [
+   0.24,
+   0.28,
+   0.32,
+   0.36,
+   0.4,
+   0.48,
+   0.56,
+   0.64,
+   0.72,
+   0.8,
+   0.88,
+   0.96,
+   1.04,
+   1.12,
+   1.52
+  ]
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "id": "k25",
+ "who": "kip",
+ "text": "Coat!",
+ "voice": "wIVKcZbkr7yia2bPb1Hm",
+ "voice_name": "Chrisva",
+ "settings": [
+  0.4,
+  0.8,
+  0.35,
+  1.0
+ ],
+ "model": "eleven_v4",
+ "alignment": {
+  "characters": [
+   "C",
+   "o",
+   "a",
+   "t",
+   "!"
+  ],
+  "character_start_times_seconds": [
+   0.0,
+   0.18,
+   0.24,
+   0.36,
+   0.48
+  ],
+  "character_end_times_seconds": [
+   0.18,
+   0.24,
+   0.36,
+   0.48,
+   0.88
+  ]
+ }
+}

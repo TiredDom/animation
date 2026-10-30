@@ -1,0 +1,40 @@
+{
+ "id": "k14",
+ "who": "kip",
+ "text": "Socks.",
+ "voice": "wIVKcZbkr7yia2bPb1Hm",
+ "voice_name": "Chrisva",
+ "settings": [
+  0.4,
+  0.8,
+  0.35,
+  1.0
+ ],
+ "model": "eleven_v4",
+ "alignment": {
+  "characters": [
+   "S",
+   "o",
+   "c",
+   "k",
+   "s",
+   "."
+  ],
+  "character_start_times_seconds": [
+   0.0,
+   0.24,
+   0.34,
+   0.44,
+   0.54,
+   0.64
+  ],
+  "character_end_times_seconds": [
+   0.24,
+   0.34,
+   0.44,
+   0.54,
+   0.64,
+   0.96
+  ]
+ }
+}

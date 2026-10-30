@@ -1,0 +1,7 @@
+node_modules/
+.hyperframes/
+renders/
+boards/lab/
+assets/vo/auditions/
+*.log
+boards/cloud/

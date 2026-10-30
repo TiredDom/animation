@@ -1,0 +1,67 @@
+{
+ "id": "k04",
+ "who": "kip",
+ "text": "You can see me?",
+ "voice": "wIVKcZbkr7yia2bPb1Hm",
+ "voice_name": "Chrisva",
+ "settings": [
+  0.4,
+  0.8,
+  0.35,
+  1.0
+ ],
+ "model": "eleven_v4",
+ "alignment": {
+  "characters": [
+   "Y",
+   "o",
+   "u",
+   " ",
+   "c",
+   "a",
+   "n",
+   " ",
+   "s",
+   "e",
+   "e",
+   " ",
+   "m",
+   "e",
+   "?"
+  ],
+  "character_start_times_seconds": [
+   0.0,
+   0.16,
+   0.2,
+   0.24,
+   0.32,
+   0.373,
+   0.427,
+   0.48,
+   0.64,
+   0.693,
+   0.747,
+   0.8,
+   0.88,
+   0.96,
+   1.04
+  ],
+  "character_end_times_seconds": [
+   0.16,
+   0.2,
+   0.24,
+   0.32,
+   0.373,
+   0.427,
+   0.48,
+   0.64,
+   0.693,
+   0.747,
+   0.8,
+   0.88,
+   0.96,
+   1.04,
+   1.36
+  ]
+ }
+}

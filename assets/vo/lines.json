@@ -1,0 +1,650 @@
+[
+ {
+  "id": "k01",
+  "who": "kip",
+  "text": "...Uh. Hello?",
+  "voice": "Chrisva",
+  "file": "assets/vo/k01.mp3",
+  "duration": 1.6,
+  "speech": [
+   0.0,
+   1.68
+  ]
+ },
+ {
+  "id": "k02",
+  "who": "kip",
+  "text": "Okay. Okay, okay, okay.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k02.mp3",
+  "duration": 2.32,
+  "speech": [
+   0.0,
+   2.4
+  ]
+ },
+ {
+  "id": "k03",
+  "who": "kip",
+  "text": "Ew.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k03.mp3",
+  "duration": 0.96,
+  "speech": [
+   0.0,
+   0.96
+  ]
+ },
+ {
+  "id": "k04",
+  "who": "kip",
+  "text": "You can see me?",
+  "voice": "Chrisva",
+  "file": "assets/vo/k04.mp3",
+  "duration": 1.28,
+  "speech": [
+   0.0,
+   1.36
+  ]
+ },
+ {
+  "id": "k05",
+  "who": "kip",
+  "text": "Rude.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k05.mp3",
+  "duration": 1.04,
+  "speech": [
+   0.0,
+   1.04
+  ]
+ },
+ {
+  "id": "k06",
+  "who": "kip",
+  "text": "Mom? MOM.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k06.mp3",
+  "duration": 1.76,
+  "speech": [
+   0.0,
+   1.84
+  ]
+ },
+ {
+  "id": "m01",
+  "who": "mom",
+  "text": "No, he won't find it. I hid it where he'll never look.",
+  "voice": "Sabine",
+  "file": "assets/vo/m01.mp3",
+  "duration": 4.24,
+  "speech": [
+   0.0,
+   4.32
+  ]
+ },
+ {
+  "id": "m02",
+  "who": "mom",
+  "text": "And he still thinks I don't know about the chips under the couch.",
+  "voice": "Sabine",
+  "file": "assets/vo/m02.mp3",
+  "duration": 3.84,
+  "speech": [
+   0.0,
+   3.92
+  ]
+ },
+ {
+  "id": "k07",
+  "who": "kip",
+  "text": "How does she know about the chips?!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k07.mp3",
+  "duration": 1.84,
+  "speech": [
+   0.0,
+   1.92
+  ]
+ },
+ {
+  "id": "k08",
+  "who": "kip",
+  "text": "Hidden present. Invisible me. ... Easy.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k08.mp3",
+  "duration": 3.44,
+  "speech": [
+   0.0,
+   3.52
+  ]
+ },
+ {
+  "id": "k09",
+  "who": "kip",
+  "text": "Shoes... shoes... shoes...",
+  "voice": "Chrisva",
+  "file": "assets/vo/k09.mp3",
+  "duration": 3.6,
+  "speech": [
+   0.0,
+   3.36
+  ]
+ },
+ {
+  "id": "k10",
+  "who": "kip",
+  "text": "Dad?",
+  "voice": "Chrisva",
+  "file": "assets/vo/k10.mp3",
+  "duration": 0.72,
+  "speech": [
+   0.0,
+   0.8
+  ]
+ },
+ {
+  "id": "k11",
+  "who": "kip",
+  "text": "I can never unsee that.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k11.mp3",
+  "duration": 1.84,
+  "speech": [
+   0.0,
+   1.92
+  ]
+ },
+ {
+  "id": "m03",
+  "who": "mom",
+  "text": "Hup!",
+  "voice": "Sabine",
+  "file": "assets/vo/m03.mp3",
+  "duration": 0.64,
+  "speech": [
+   0.0,
+   0.64
+  ]
+ },
+ {
+  "id": "k12",
+  "who": "kip",
+  "text": "Bingo.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k12.mp3",
+  "duration": 0.96,
+  "speech": [
+   0.0,
+   0.96
+  ]
+ },
+ {
+  "id": "k13",
+  "who": "kip",
+  "text": "Oh, come ON.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k13.mp3",
+  "duration": 1.52,
+  "speech": [
+   0.0,
+   1.6
+  ]
+ },
+ {
+  "id": "k14",
+  "who": "kip",
+  "text": "Socks.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k14.mp3",
+  "duration": 0.88,
+  "speech": [
+   0.0,
+   0.96
+  ]
+ },
+ {
+  "id": "k15",
+  "who": "kip",
+  "text": "Nobody ever checks the attic.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k15.mp3",
+  "duration": 2.08,
+  "speech": [
+   0.0,
+   2.08
+  ]
+ },
+ {
+  "id": "k16",
+  "who": "kip",
+  "text": "Baby pictures... no...",
+  "voice": "Chrisva",
+  "file": "assets/vo/k16.mp3",
+  "duration": 2.64,
+  "speech": [
+   0.0,
+   2.72
+  ]
+ },
+ {
+  "id": "k17",
+  "who": "kip",
+  "text": "...Spectators can't be touched.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k17.mp3",
+  "duration": 2.0,
+  "speech": [
+   0.0,
+   2.08
+  ]
+ },
+ {
+  "id": "m04",
+  "who": "mom",
+  "text": "Looking for something?",
+  "voice": "Sabine",
+  "file": "assets/vo/m04.mp3",
+  "duration": 1.28,
+  "speech": [
+   0.0,
+   1.36
+  ]
+ },
+ {
+  "id": "k18",
+  "who": "kip",
+  "text": "AAAAAAH!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k18.mp3",
+  "duration": 1.36,
+  "speech": [
+   0.0,
+   1.36
+  ]
+ },
+ {
+  "id": "k19",
+  "who": "kip",
+  "text": "MOM?! You... you have...",
+  "voice": "Chrisva",
+  "file": "assets/vo/k19.mp3",
+  "duration": 2.64,
+  "speech": [
+   0.0,
+   2.64
+  ]
+ },
+ {
+  "id": "m05",
+  "who": "mom",
+  "text": "Spectator mode? Sweetie. I've had it since I was your age.",
+  "voice": "Sabine",
+  "file": "assets/vo/m05.mp3",
+  "duration": 4.88,
+  "speech": [
+   0.0,
+   4.96
+  ]
+ },
+ {
+  "id": "m06",
+  "who": "mom",
+  "text": "How do you think I know about the chips?",
+  "voice": "Sabine",
+  "file": "assets/vo/m06.mp3",
+  "duration": 2.32,
+  "speech": [
+   0.0,
+   2.4
+  ]
+ },
+ {
+  "id": "k20",
+  "who": "kip",
+  "text": "Every time I got caught... that was YOU?",
+  "voice": "Chrisva",
+  "file": "assets/vo/k20.mp3",
+  "duration": 3.12,
+  "speech": [
+   0.0,
+   3.2
+  ]
+ },
+ {
+  "id": "m07",
+  "who": "mom",
+  "text": "One more thing. If your timer hits zero before you're back in your body... you stay like this. Forever.",
+  "voice": "Sabine",
+  "file": "assets/vo/m07.mp3",
+  "duration": 7.76,
+  "speech": [
+   0.0,
+   7.84
+  ]
+ },
+ {
+  "id": "k21",
+  "who": "kip",
+  "text": "Okay, bye!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k21.mp3",
+  "duration": 1.44,
+  "speech": [
+   0.0,
+   1.52
+  ]
+ },
+ {
+  "id": "k22",
+  "who": "kip",
+  "text": "No. No no no. Where am I?!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k22.mp3",
+  "duration": 3.28,
+  "speech": [
+   0.0,
+   3.28
+  ]
+ },
+ {
+  "id": "m08",
+  "who": "mom",
+  "text": "Warmer...",
+  "voice": "Sabine",
+  "file": "assets/vo/m08.mp3",
+  "duration": 0.96,
+  "speech": [
+   0.0,
+   1.04
+  ]
+ },
+ {
+  "id": "k23",
+  "who": "kip",
+  "text": "Gah! Your body is so creepy.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k23.mp3",
+  "duration": 2.88,
+  "speech": [
+   0.0,
+   2.96
+  ]
+ },
+ {
+  "id": "m09",
+  "who": "mom",
+  "text": "Colder.",
+  "voice": "Sabine",
+  "file": "assets/vo/m09.mp3",
+  "duration": 1.12,
+  "speech": [
+   0.0,
+   1.12
+  ]
+ },
+ {
+  "id": "k24",
+  "who": "kip",
+  "text": "Laundry!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k24.mp3",
+  "duration": 0.88,
+  "speech": [
+   0.0,
+   0.96
+  ]
+ },
+ {
+  "id": "k25",
+  "who": "kip",
+  "text": "Coat!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k25.mp3",
+  "duration": 0.88,
+  "speech": [
+   0.0,
+   0.88
+  ]
+ },
+ {
+  "id": "k26",
+  "who": "kip",
+  "text": "Cushions!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k26.mp3",
+  "duration": 0.96,
+  "speech": [
+   0.0,
+   1.04
+  ]
+ },
+ {
+  "id": "m10",
+  "who": "mom",
+  "text": "You know, you could just ask.",
+  "voice": "Sabine",
+  "file": "assets/vo/m10.mp3",
+  "duration": 2.48,
+  "speech": [
+   0.0,
+   2.56
+  ]
+ },
+ {
+  "id": "k27",
+  "who": "kip",
+  "text": "Then you'd win!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k27.mp3",
+  "duration": 1.28,
+  "speech": [
+   0.0,
+   1.12
+  ]
+ },
+ {
+  "id": "m11",
+  "who": "mom",
+  "text": "Mm-hm.",
+  "voice": "Sabine",
+  "file": "assets/vo/m11.mp3",
+  "duration": 0.88,
+  "speech": [
+   0.0,
+   0.96
+  ]
+ },
+ {
+  "id": "k28",
+  "who": "kip",
+  "text": "I just wanted to see my present.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k28.mp3",
+  "duration": 2.0,
+  "speech": [
+   0.0,
+   2.08
+  ]
+ },
+ {
+  "id": "k29",
+  "who": "kip",
+  "text": "...What?",
+  "voice": "Chrisva",
+  "file": "assets/vo/k29.mp3",
+  "duration": 0.72,
+  "speech": [
+   0.0,
+   0.8
+  ]
+ },
+ {
+  "id": "k30",
+  "who": "kip",
+  "text": "You know where I am?",
+  "voice": "Chrisva",
+  "file": "assets/vo/k30.mp3",
+  "duration": 1.44,
+  "speech": [
+   0.0,
+   1.44
+  ]
+ },
+ {
+  "id": "k31",
+  "who": "kip",
+  "text": "THERE I AM!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k31.mp3",
+  "duration": 1.2,
+  "speech": [
+   0.0,
+   1.04
+  ]
+ },
+ {
+  "id": "k32",
+  "who": "kip",
+  "text": "Haah! I'm back! I'm...",
+  "voice": "Chrisva",
+  "file": "assets/vo/k32.mp3",
+  "duration": 2.72,
+  "speech": [
+   0.0,
+   2.72
+  ]
+ },
+ {
+  "id": "k33",
+  "who": "kip",
+  "text": "...Why is my lip sticky?",
+  "voice": "Chrisva",
+  "file": "assets/vo/k33.mp3",
+  "duration": 1.76,
+  "speech": [
+   0.0,
+   1.84
+  ]
+ },
+ {
+  "id": "m12",
+  "who": "mom",
+  "text": "Happy birthday, sweetie.",
+  "voice": "Sabine",
+  "file": "assets/vo/m12.mp3",
+  "duration": 1.84,
+  "speech": [
+   0.0,
+   1.92
+  ]
+ },
+ {
+  "id": "k34",
+  "who": "kip",
+  "text": "Mom. About last night...",
+  "voice": "Chrisva",
+  "file": "assets/vo/k34.mp3",
+  "duration": 2.24,
+  "speech": [
+   0.0,
+   2.32
+  ]
+ },
+ {
+  "id": "m13",
+  "who": "mom",
+  "text": "No idea what you mean.",
+  "voice": "Sabine",
+  "file": "assets/vo/m13.mp3",
+  "duration": 2.0,
+  "speech": [
+   0.0,
+   2.0
+  ]
+ },
+ {
+  "id": "m14",
+  "who": "mom",
+  "text": "Your present's been under your bed the whole time.",
+  "voice": "Sabine",
+  "file": "assets/vo/m14.mp3",
+  "duration": 2.96,
+  "speech": [
+   0.0,
+   3.04
+  ]
+ },
+ {
+  "id": "k35",
+  "who": "kip",
+  "text": "...I slept on it.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k35.mp3",
+  "duration": 1.36,
+  "speech": [
+   0.0,
+   1.36
+  ]
+ },
+ {
+  "id": "m15",
+  "who": "mom",
+  "text": "All night.",
+  "voice": "Sabine",
+  "file": "assets/vo/m15.mp3",
+  "duration": 1.36,
+  "speech": [
+   0.0,
+   1.36
+  ]
+ },
+ {
+  "id": "k36",
+  "who": "kip",
+  "text": "...I look like Dad.",
+  "voice": "Chrisva",
+  "file": "assets/vo/k36.mp3",
+  "duration": 1.36,
+  "speech": [
+   0.0,
+   1.44
+  ]
+ },
+ {
+  "id": "k37",
+  "who": "kip",
+  "text": "MOM!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k37.mp3",
+  "duration": 1.04,
+  "speech": [
+   0.0,
+   1.04
+  ]
+ },
+ {
+  "id": "m16",
+  "who": "mom",
+  "text": "Happy birthday!",
+  "voice": "Sabine",
+  "file": "assets/vo/m16.mp3",
+  "duration": 1.52,
+  "speech": [
+   0.0,
+   1.52
+  ]
+ },
+ {
+  "id": "k38",
+  "who": "kip",
+  "text": "...EVERYONE has it?!",
+  "voice": "Chrisva",
+  "file": "assets/vo/k38.mp3",
+  "duration": 1.52,
+  "speech": [
+   0.0,
+   1.52
+  ]
+ }
+]

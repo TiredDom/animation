@@ -1,0 +1,49 @@
+{
+ "id": "k26",
+ "who": "kip",
+ "text": "Cushions!",
+ "voice": "wIVKcZbkr7yia2bPb1Hm",
+ "voice_name": "Chrisva",
+ "settings": [
+  0.4,
+  0.8,
+  0.35,
+  1.0
+ ],
+ "model": "eleven_v4",
+ "alignment": {
+  "characters": [
+   "C",
+   "u",
+   "s",
+   "h",
+   "i",
+   "o",
+   "n",
+   "s",
+   "!"
+  ],
+  "character_start_times_seconds": [
+   0.0,
+   0.08,
+   0.16,
+   0.24,
+   0.32,
+   0.44,
+   0.56,
+   0.68,
+   0.8
+  ],
+  "character_end_times_seconds": [
+   0.08,
+   0.16,
+   0.24,
+   0.32,
+   0.44,
+   0.56,
+   0.68,
+   0.8,
+   1.04
+  ]
+ }
+}
