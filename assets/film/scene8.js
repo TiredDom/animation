@@ -49,7 +49,7 @@ export const SCENE8 = {
       // his eyes follow it all the way: "...EVERYONE has it?!"
       const rise = ramp(lt, 3.6, 6.0, E.inOut), go = ramp(lt, 6.9, 8.6, E.inOut);
       const out = lt >= 3.6;
-      const cat = catOnSill(w, t, { live: !out, head: [-4, 0, 0], face: out ? { eyeScale: 1.05 } : 'calm' });
+      catOnSill(w, t, { live: !out, head: [-4, 0, 0], face: out ? { eyeScale: 1.05 } : 'calm' });
       // the ghost: same pose and place, rising; a look to him; then off to her left (−x) and through the left wall
       if (out) {
         const s = w.house.spots.kipSill;
@@ -61,14 +61,13 @@ export const SCENE8 = {
         });
       }
       // his head goes up with the ghost, follows it off to his right, and snaps back to the cat for the line
-      const k = kipWithPresent(w, t, {
+      kipWithPresent(w, t, {
         who: 'kip',
         head: [track(lt, [[3.6, 6], [5.6, -6], [7.4, -2]]), track(lt, [[6.9, 14], [7.7, -24], [8.1, 12]]), 0],
         face: faceTrack(w, lt, [[0, KIP_STARE], [3.4, Object.assign({}, KIP_STARE, { lid: 0.2, lidSlant: 0.4, browTilt: 0.4 })], [4.4, { eyeScale: 1.25, browUp: 0.8, mouthOpen: 0.1, lookY: 0.2 }],
           [6.0, { eyeScale: 1.35, browUp: 1, mouthOpen: 0.2, mouthRound: 0.4, lookY: 0.25 }], [7.6, { eyeScale: 1.3, browUp: 1, lookX: 0.5 }],
           [9.4, { eyeScale: 1.4, browUp: 1, browTilt: -0.7, mouthCurve: -0.5, mouthWide: 1.1, lookX: 0.3 }]]),
       });
-      void cat; void k;
       w.cam([0.0, UP + 1.45, 0.9], [-2.15, UP + 1.2, 1.2], 46);
     },
   },

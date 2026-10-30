@@ -2,7 +2,7 @@
 // a straight face; "about last night" gets "no idea what you mean"; the present was under his bed all along; he
 // catches himself in the mirror (and, for one second, Dad's disco photo); "MOM!" as she goes.
 import * as THREE from 'three';
-import { V, person, faceTrack, headOf, onHead, poseWith, cruise, track, E, ramp, kipInBed } from './stage.js';
+import { V, person, faceTrack, headOf, poseWith, cruise, track, E, ramp, kipInBed } from './stage.js';
 import { walk, walkPhase } from './motion.js';
 
 const UP = 2.92;
