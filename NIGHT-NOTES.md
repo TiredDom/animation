@@ -10,6 +10,7 @@ Every shot, 1–69, is animated. Each scene was checked frame by frame in the la
 
 | Scene | Shots | What changed tonight |
 | --- | --- | --- |
+| 2 Easy | 12 | Fixed from the full-size QA stills: the two-shot cropped the top of ghost Kip's head and Mom's head covered his mouth; he waves from a little further off and the frame is taller. |
 | 3 The search | 17–33 | Restaged so every shot reads: no camera inside a wall, box or head; Dad's portrait shows his face; the marker, the mustache, the hoist and carry, the garage box, the attic and the tap all read. |
 | 4 Looking for something? | 34–43 | New (`scene4.js`). |
 | 5 Where's my body? | 44–55 | New (`scene5.js`). |
@@ -48,9 +49,14 @@ Three departures from SPEC § LOOK, all for the text rules in HANDOFF.md (never 
 - **Captions that would cover a face go to the top of the frame** (top of the title-safe box). `tools/faces.cjs`
   (with `node tools/serve.cjs 5178` running) poses the film every 0.2 s while each line can be on screen, projects
   every face turned to the camera (brows to chin), and writes `assets/film/caption-faces.json`; `overlays.py` reads
-  it. 18 of the 54 lines go to the top. Rerun it after restaging a shot.
+  it. 19 of the 54 lines go to the top. Rerun it after restaging a shot.
 - The title card keeps the spec's look with a soft dark halo behind the letters, so "KIP" in yellow reads over the
   dollhouse's pale attic.
+
+**Whole-film QA.** Besides the per-scene lab passes, `npx --yes hyperframes@0.8.221 snapshot` stills at full size
+through the real composition (overlays included): every shot at its middle, every HUD reading, the title, the end card
+and every caption that moved (`boards/cloud/`, `boards/cloud2/`, not in git). What they caught is fixed: shot 12,
+captions over chins in the close shots, captions low in contrast.
 
 **Sound cues.** `assets/film/cues.js` exports `CUES` (64 cues: `{ t, what, shot }`), each a moment in a shot taken
 from that shot's motion constants and placed by `TIMELINE`, so they follow a retime.
@@ -110,7 +116,8 @@ All in `assets/kit/house.js`; `scripts/sync-kit.cjs` will overwrite them unless 
 - No final render was made (not tonight's job), so nothing has been checked as video: no blackdetect, no frame-rate
   check, no lip sync against the mix.
 - `cues.js` is computed from the motion; nobody has heard a sound on it yet.
-- Scenes 1–2 were not reworked tonight (only seen again in the final QA stills).
+- Scenes 1–2 were not reworked tonight beyond shot 12; they were seen again only in the full-size QA stills (one or
+  two moments a shot), not in dense passes.
 
 ## Open questions
 
@@ -118,4 +125,6 @@ All in `assets/kit/house.js`; `scripts/sync-kit.cjs` will overwrite them unless 
   captions without two groups on screen at once (the next line starts too soon); they stay up until the next line
   instead (at least 1.1 s). Merge those exchanges into two-speaker groups, or keep one group at a time?
 - **The HUD sits on y 84 as SPEC.md says**, which is inside the action-safe box but above the 80% title-safe box.
+- **"Rude." (k05)** goes to the top of the frame (his face fills the bottom of shot 8); for about 0.4 s of its hold the
+  top of his head comes up under it.
 - **"Next: Kip vs. ___"** is a placeholder: what is episode 2?

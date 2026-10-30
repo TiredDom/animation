@@ -201,8 +201,8 @@ CARDS_CSS = """      /* the title card: 120 px, KIP in Kip's yellow, the rest wh
       /* the end card: in the left 40% of the frame, clear of YouTube's end-screen elements on the right */
       .next-card {
         position: absolute;
-        left: 120px;
-        width: 640px;
+        left: 200px;
+        width: 560px;
         bottom: 128px;
         font-family: "Itim", sans-serif;
         font-size: 64px;
